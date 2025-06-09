@@ -4,6 +4,7 @@
 #include <iostream>
 #include <random>
 
+//Struktura wpisu do tablicy
 struct Cuckoo_entry {
     int key;
     int value;
