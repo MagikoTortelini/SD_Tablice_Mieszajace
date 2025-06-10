@@ -4,14 +4,14 @@
 #include <iostream>
 using namespace std;
 
-struct element {
+struct element_table {
     int key;
     int el;
 };
 
 class Tablica_dynamiczna {
 private:
-    element* tab;
+    element_table* tab;
     int size;
 public:
     int actual;
@@ -19,7 +19,7 @@ public:
     Tablica_dynamiczna(int s = 10) {  // domyslny rozmiar kubelka = 10
         actual = 0;
         size = s;
-        tab = new element[size];
+        tab = new element_table[size];
     }
 
     ~Tablica_dynamiczna() {
@@ -28,7 +28,7 @@ public:
 
     int resize() {
         int new_size = size * 2;
-        element* new_tab = new element[new_size];
+        element_table* new_tab = new element_table[new_size];
 
         for (int i = 0; i < actual; i++) {
             new_tab[i] = tab[i];
@@ -40,7 +40,7 @@ public:
         return size;
     }
 
-    void add_end(element el) {
+    void add_end(element_table el) {
         if (actual == size) {
             resize();
         }

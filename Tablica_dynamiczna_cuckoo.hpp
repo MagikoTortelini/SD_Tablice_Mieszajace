@@ -1,11 +1,11 @@
-#ifndef tablica_dynamiczna_hpp
-#define tablica_dynamiczna_hpp
+#ifndef TABLICA_DYNAMICZNA_CUCKOO_HPP
+#define TABLICA_DYNAMICZNA_CUCKOO_HPP
 #include <iostream>
 
 using namespace std;
 
 template<typename T>
-class Tablica_dynamiczna {
+class Tablica_dynamiczna_cuckoo {
 private:
     T *tab;
     int size;
@@ -13,7 +13,7 @@ private:
 
 public:
 
-    Tablica_dynamiczna(int s) {
+    Tablica_dynamiczna_cuckoo(int s) {
         actual = 0;
         size = s;
         tab = new T[size];
@@ -22,7 +22,7 @@ public:
         }
     };
 
-    ~Tablica_dynamiczna() {
+    ~Tablica_dynamiczna_cuckoo() {
         delete[] tab;
     };
 

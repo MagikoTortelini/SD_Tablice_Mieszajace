@@ -1,6 +1,6 @@
 #ifndef CUCKOO_HPP
 #define CUCKOO_HPP
-#include "tablica_dynamiczna.hpp"
+#include "Tablica_dynamiczna_cuckoo.hpp"
 #include <iostream>
 #include <random>
 
@@ -14,8 +14,8 @@ struct Cuckoo_entry {
 class Cuckoo{
 private:
     int size;
-    Tablica_dynamiczna<Cuckoo_entry*> tablica1;
-    Tablica_dynamiczna<Cuckoo_entry*> tablica2;
+    Tablica_dynamiczna_cuckoo<Cuckoo_entry*> tablica1;
+    Tablica_dynamiczna_cuckoo<Cuckoo_entry*> tablica2;
     int hashfunction(int key) {
         return (key)% size;
     };
@@ -29,8 +29,8 @@ private:
         size = oldsize * 2;
 
 
-        Tablica_dynamiczna<Cuckoo_entry*> tablica1_temp(oldsize * 2);
-        Tablica_dynamiczna<Cuckoo_entry*> tablica2_temp(oldsize * 2);
+        Tablica_dynamiczna_cuckoo<Cuckoo_entry*> tablica1_temp(oldsize * 2);
+        Tablica_dynamiczna_cuckoo<Cuckoo_entry*> tablica2_temp(oldsize * 2);
 
 
         for (int i = 0; i < oldsize; i++) {
@@ -51,11 +51,11 @@ private:
         for (int i = 0; i < oldsize; i++) {
             if (tablica1_temp.get(i) != nullptr) {
                insert(tablica1_temp.get(i)->key, tablica1_temp.get(i)->value);
-                tablica1_temp.get(i) = nullptr;
+                tablica1_temp.del(i);
             }
             if (tablica2_temp.get(i) != nullptr) {
                 insert(tablica2_temp.get(i)->key, tablica2_temp.get(i)->value);
-                tablica2_temp.get(i) = nullptr;
+                tablica2_temp.del(i);
             }
         }
 
@@ -64,7 +64,17 @@ private:
 public:
     Cuckoo(int size) : size(size), tablica1(size), tablica2(size) {
     }
-    ~Cuckoo()=default;
+    ~Cuckoo()
+    {
+        for (int i = 0; i < size; i++) {
+            if (tablica1.get(i) != nullptr) {
+                delete tablica1.get(i);
+            }
+            if (tablica2.get(i) != nullptr) {
+                delete tablica2.get(i);
+            }
+        }
+    }
     
 
     void insert(int key, int value) {
@@ -120,6 +130,7 @@ public:
 
         if (tablica1.get(index) != nullptr && tablica1.get(index)->key == key) {
            tablica1.del(index);
+           return;
         }
         if (tablica2.get(index2) != nullptr && tablica2.get(index2)->key == key) {
             tablica2.del(index2);
