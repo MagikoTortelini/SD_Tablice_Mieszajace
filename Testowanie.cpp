@@ -74,7 +74,7 @@ void Test_insert(int ilosc,int typ,int liczba_,int priorytet){
                     int e;
                     int p;
                     plik>>e>>p;
-
+                    
                     cuckoo.insert(e,p);
 
                 }
@@ -245,8 +245,7 @@ void testy(int decyzja_){
     std::cout<<"TESTOWANIE STRUKTURY:"<<std::endl<<"Wybierz opcje testu:"<<std::endl;
     std::cout<<"1. Test Insert"<<std::endl<<
                "2. Test remove"<<std::endl<<
-               "3. Test display"<<std::endl<<
-               "4. Wroc"<<std::endl;
+               "3. Wroc"<<std::endl;
 
                
 
@@ -274,16 +273,7 @@ void testy(int decyzja_){
         }
     }
         break;
-    case 3:{
-            system("clear");
-            for(int i=0;i<zakres.size();i++){
-                std::cout<<"Test dla zakresu: "<<zakres[i]<<std::endl;
-                Test_remove(zakres[i],decyzja_);
-            }
-        }
-            break;
-
-    case 4:
+    case 3:
         temp=false;
         break;
     default:
