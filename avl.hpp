@@ -17,6 +17,8 @@ class Avl {
 public:
     element* root;
     Avl() : root(nullptr) {}
+    ~Avl() { del(root); }
+
     void insert(int key, int value) {
         root = insert(root, key, value);
     }
@@ -28,6 +30,12 @@ public:
         cout << endl;
     }
 private:
+    void del(element* node) {
+        if (!node) return;
+        del(node->left);
+        del(node->right);
+        delete node;
+    }
     int height(element* node) {
         if (node != nullptr) { return node->factor; }
         else { return 0; }
