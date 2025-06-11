@@ -2,6 +2,7 @@
 #define CUCKOO_HPP
 #include "Tablica_dynamiczna_cuckoo.hpp"
 #include <iostream>
+#include <cmath>
 
 
 
